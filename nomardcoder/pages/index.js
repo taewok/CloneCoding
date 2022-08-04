@@ -5,12 +5,12 @@ export default function Home() {
   const [movies, setMovies] = useState();
   useEffect(() => {
     (async () => {
-      const { results } = await (await fetch("https://api.themoviedb.org/3/movie/popular?api_key=27c778fbef0dd062df41b4202379a763")).json();
+      const { results } = await (await fetch("/api/movies")).json();
       setMovies(results);
       console.log(results)
     })();
   }, []);
-  return (
+  return (  
     <div className="container">
       <Seo title="Home" />
       {!movies && <h4>Loading...</h4>}
