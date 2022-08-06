@@ -11,12 +11,23 @@ export default function Home() {
       setMovies(results);
     })();
   }, []);
+  const onClick = (movie) => {
+    router.push(
+      {
+        pathname: `/movies/${movie.id}`,
+        query: {
+          title: `${movie.title}`,
+        },
+      },
+      `/movies/${movie.id}`
+    );
+  };
   return (
     <div className="container">
       <Seo title="Home" />
       {!movies && <h4>Loading...</h4>}
       {movies?.map((movie) => (
-        <div className="movie" onClick={()=>router.push(`/movies/${movie.id}`)} key={movie.id}>
+        <div className="movie" onClick={() => onClick(movie)} key={movie.id}>
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
           <h4>{movie.original_title}</h4>
         </div>
