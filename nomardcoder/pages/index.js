@@ -1,22 +1,23 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Seo from "./components/Seo";
 
 export default function Home() {
+  const router = useRouter();
   const [movies, setMovies] = useState();
   useEffect(() => {
     (async () => {
       const { results } = await (await fetch("/api/movies")).json();
       setMovies(results);
-      console.log(results)
     })();
   }, []);
-  return (  
+  return (
     <div className="container">
       <Seo title="Home" />
       {!movies && <h4>Loading...</h4>}
       {movies?.map((movie) => (
-        <div className="movie" key={movie.id}>
-          <img src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} />
+        <div className="movie" onClick={()=>router.push(`/movies/${movie.id}`)} key={movie.id}>
+          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} />
           <h4>{movie.original_title}</h4>
         </div>
       ))}
