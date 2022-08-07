@@ -12,15 +12,7 @@ export default function Home() {
     })();
   }, []);
   const onClick = (movie) => {
-    router.push(
-      {
-        pathname: `/movies/${movie.id}`,
-        query: {
-          title: `${movie.title}`,
-        },
-      },
-      `/movies/${movie.id}`
-    );
+    router.push(`/movies/${movie.title}/${movie.id}`);
   };
   return (
     <div className="container">
